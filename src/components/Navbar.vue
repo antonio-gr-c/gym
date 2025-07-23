@@ -36,12 +36,15 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import logo from '../assets/images/logo.png'
 
 const menu = ref([
-  { nombre: 'Administración',     ruta: '/admin',       icono: 'admin_panel_settings' },
-  { nombre: 'Ventas',             ruta: '/ventas',      icono: 'point_of_sale'         },
-  { nombre: 'Compras',            ruta: '/compras',     icono: 'shopping_cart'         },
-  { nombre: 'Almacén',            ruta: '/almacen',     icono: 'inventory_2'           },
-  { nombre: 'Contabilidad',       ruta: '/contabilidad',icono: 'request_quote'         },
-  { nombre: 'Recursos Humanos',   ruta: '/rrhh',        icono: 'groups'                }
+  { nombre: 'Administración', ruta: '/admin', icono: 'admin_panel_settings' },
+  { nombre: 'Check-in', ruta: '/check-in', icono: 'how_to_reg' },
+  { nombre: 'Clientes', ruta: '/clientes', icono: 'people' },
+  { nombre: 'Entrenadores', ruta: '/entrenadores', icono: 'fitness_center' },
+  { nombre: 'Ventas', ruta: '/ventas', icono: 'point_of_sale' },
+  { nombre: 'Paquetes', ruta: '/paquetes', icono: 'card_giftcard' },
+  { nombre: 'Productos', ruta: '/productos', icono: 'shopping_bag' },
+  { nombre: 'Servicios', ruta: '/servicios', icono: 'miscellaneous_services' },
+  { nombre: 'Promociones', ruta: '/promociones', icono: 'local_offer' }
 ])
 
 onMounted(() => {
@@ -56,8 +59,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+@import '../assets/colors.css';
 .fondo-navbar {
-  background-color: #02040f; /* NUEVO COLOR VERDE */
+  background-color: var(--color-principal, #02040f); /* NUEVO COLOR VERDE */
   padding: 1.2rem 2rem;
   position: sticky;
   top: 0;
@@ -86,17 +90,19 @@ onMounted(() => {
   margin-right: 1.5rem;
 }
 
+
 .nav-link {
-  color: #ffffff !important;
+  color: var(--color-texto-navbar, #ffffff) !important;
   font-weight: 500;
   display: flex;
   align-items: center;
   transition: color 0.3s;
 }
 
+
 .nav-link.router-link-active,
 .nav-link:hover {
-  color: #333 !important;
+  color: var(--color-acento, #333) !important;
 }
 
 /* Botón de login solo ícono */
@@ -106,13 +112,13 @@ onMounted(() => {
   justify-content: center;
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: var(--color-texto-navbar, #ffffff);
   padding: 0.25rem;
   font-size: 1.5rem;
   transition: color 0.3s;
 }
 
 .btn-login-icon:hover {
-  color: #333;
+  color: var(--color-acento, #333);
 }
 </style>

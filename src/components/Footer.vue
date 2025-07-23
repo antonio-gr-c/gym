@@ -60,8 +60,9 @@ import logo from '../assets/images/logo.png'
 </script>
 
 <style scoped>
+@import '../assets/colors.css';
 .footer-section {
-  background-color: var(--negro-ahumado);
+  background-color: var(--negro-profundo);
   color: var(--blanco);
   padding: 4rem 0;
   box-shadow: 0 -8px 32px rgba(0,0,0,0.18), 0 -1.5px 0 rgba(0,0,0,0.08); /* Sombra superior para dividir del FAQ */
@@ -96,7 +97,7 @@ import logo from '../assets/images/logo.png'
   transition: color 0.3s;
 }
 .footer-direccion-link:hover {
-  color: var(--durazno);
+  color: var(--ambar-intenso);
 }
 .footer-accion {
   display: flex;
@@ -118,7 +119,7 @@ import logo from '../assets/images/logo.png'
   transition: color 0.3s;
 }
 .footer-redes-lista li a:hover {
-  color: var(--durazno);
+  color: var(--ambar-intenso);
 }
 @media (max-width: 768px) {
   .footer-container {

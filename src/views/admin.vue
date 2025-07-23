@@ -42,9 +42,10 @@
     </div>
     <!-- Fin de gráficas en dos columnas -->
 
+
     <!-- Tarjetas KPI -->
     <div class="row mb-4 align-items-stretch">
-      <div class="col-md-3 col-lg-3 mb-3" v-for="(kpi, index) in kpisFormateados" :key="index">
+      <div class="col-md-3 col-lg-2 mb-3" v-for="(kpi, index) in kpisFormateados" :key="index">
         <div class="card tarjeta-kpi h-100">
           <div class="card-body d-flex align-items-center">
             <i class="material-icons kpi-icon me-3">{{ kpi.icono }}</i>
@@ -57,6 +58,98 @@
       </div>
     </div>
     <!-- Fin de tarjetas KPI -->
+
+    <!-- Accesos rápidos -->
+    <div class="row mb-4">
+      <div class="col-md-3 mb-3" v-for="(acceso, idx) in accesos" :key="idx">
+        <a :href="acceso.ruta" class="btn-acceso-grande d-flex flex-column align-items-center justify-content-center">
+          <i class="material-icons mb-2">{{ acceso.icono }}</i>
+          {{ acceso.label }}
+        </a>
+      </div>
+    </div>
+    <!-- Fin accesos rápidos -->
+
+    <!-- Tablas de contexto gym -->
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 tarjeta-tabla">
+          <div class="card-body">
+            <h5 class="card-title d-flex align-items-center">
+              <i class="material-icons me-2">event_busy</i>
+              Membresías próximas a vencer
+            </h5>
+            <div class="tabla-scroll">
+              <table class="table table-sm align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Tipo</th>
+                    <th>Vence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Juan Pérez</td>
+                    <td>Mensual</td>
+                    <td>25/07/2025</td>
+                  </tr>
+                  <tr>
+                    <td>María López</td>
+                    <td>Anual</td>
+                    <td>28/07/2025</td>
+                  </tr>
+                  <tr>
+                    <td>Carlos Ruiz</td>
+                    <td>Mensual</td>
+                    <td>30/07/2025</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 tarjeta-tabla">
+          <div class="card-body">
+            <h5 class="card-title d-flex align-items-center">
+              <i class="material-icons me-2">person_add</i>
+              Últimos clientes registrados
+            </h5>
+            <div class="tabla-scroll">
+              <table class="table table-sm align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Fecha alta</th>
+                    <th>Tipo Membresía</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Laura Gómez</td>
+                    <td>20/07/2025</td>
+                    <td>Mensual</td>
+                  </tr>
+                  <tr>
+                    <td>Pedro Sánchez</td>
+                    <td>19/07/2025</td>
+                    <td>Trimestral</td>
+                  </tr>
+                  <tr>
+                    <td>Andrea Torres</td>
+                    <td>18/07/2025</td>
+                    <td>Anual</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin tablas contexto gym -->
 
     <!-- Productos más vendidos y stock bajo -->
     <div class="row">
@@ -151,15 +244,23 @@ export default {
       new Chart(barrasRef.value, {
         type: 'bar',
         data: {
-          labels: ['Equipos', 'Medicamentos', 'Consultas', 'Otros'],
+          labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
           datasets: [{
-            label: 'Ventas por categoría',
-            data: [3200, 4500, 2900, 1700],
+            label: 'Visitas por día',
+            data: [80, 95, 110, 105, 120, 130, 90],
             backgroundColor: [
-              '#e59500', '#8bb859', '#92b349', '#4e6b2e'
+              '#e59500', '#ffb347', '#ffd580', '#ff9100', '#e59500', '#ffb347', '#ffd580'
             ],
+            borderColor: [
+              '#b36b00', '#e59500', '#ff9100', '#b36b00', '#b36b00', '#e59500', '#ff9100'
+            ],
+            borderWidth: 2,
             borderRadius: 8,
-            barThickness: 18
+            barThickness: 18,
+            pointBackgroundColor: '#e59500',
+            pointBorderColor: '#fff',
+            pointRadius: 5,
+            pointHoverRadius: 7
           }]
         },
         options: {
@@ -169,12 +270,12 @@ export default {
           scales: {
             y: {
               beginAtZero: true,
-              ticks: { color: '#4e6b2e', font: { size: 10 } },
-              grid: { color: '#e9f4d3' }
+              ticks: { color: '#e59500', font: { size: 10 } },
+              grid: { color: '#ffe5b4' }
             },
             x: {
-              ticks: { color: '#4e6b2e', font: { size: 10 } },
-              grid: { color: '#e9f4d3' }
+              ticks: { color: '#e59500', font: { size: 10 } },
+              grid: { color: '#ffe5b4' }
             }
           }
         }
@@ -183,18 +284,26 @@ export default {
       new Chart(pastelRef.value, {
         type: 'pie',
         data: {
-          labels: ['Paracetamol', 'Termómetros', 'Jeringas', 'Otros'],
+          labels: ['Área Kids Funcional', 'Funcional Adultos', 'Área de Pesas', 'Área de Fisioterapia'],
           datasets: [{
-            data: [25, 30, 15, 30],
+            data: [40, 55, 80, 25],
             backgroundColor: [
-              '#e59500', '#8bb859', '#92b349', '#4e6b2e'
-            ]
+              '#e59500', '#ffb347', '#ffd580', '#ff9100'
+            ],
+            borderColor: [
+              '#b36b00', '#e59500', '#ff9100', '#b36b00'
+            ],
+            borderWidth: 2,
+            pointBackgroundColor: '#e59500',
+            pointBorderColor: '#fff',
+            pointRadius: 6,
+            pointHoverRadius: 8
           }]
         },
         options: {
           plugins: {
             legend: {
-              labels: { color: '#4e6b2e', font: { weight: 'bold', size: 10 } }
+              labels: { color: '#e59500', font: { weight: 'bold', size: 10 } }
             }
           }
         }
@@ -209,13 +318,16 @@ export default {
         { titulo: 'Ventas del día', valor: '$1,250.00', icono: 'attach_money' },
         { titulo: 'Ventas del mes', valor: '$32,000.00', icono: 'calendar_today' },
         { titulo: 'Clientes registrados', valor: '182', icono: 'people' },
-        { titulo: 'Productos activos', valor: '67', icono: 'inventory_2' }
+        { titulo: 'Membresías activas', valor: '95', icono: 'card_membership' },
+        { titulo: 'Asistencias hoy', valor: '54', icono: 'how_to_reg' },
+        { titulo: 'Membresías por vencer', valor: '7', icono: 'event_busy' },
+        
       ],
       accesos: [
-        { label: 'Nueva venta', icono: 'point_of_sale', ruta: '#' },
-        { label: 'Registrar cliente', icono: 'person_add', ruta: '#' },
-        { label: 'Agregar producto', icono: 'add_box', ruta: '#' },
-        { label: 'Agendar servicio', icono: 'event', ruta: '#' }
+        { label: 'Registrar asistencia', icono: 'how_to_reg', ruta: '#' },
+        { label: 'Nueva membresía', icono: 'card_membership', ruta: '#' },
+        { label: 'Agendar clase grupal', icono: 'event', ruta: '#' },
+        { label: 'Nueva venta', icono: 'point_of_sale', ruta: '#' }
       ]
     }
   }
@@ -223,32 +335,33 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/colors.css';
 .encabezado-dashboard {
-  background-color: #e59500;
+  background-color: var(--ambar-intenso);
   border-radius: 8px;
   font-family: 'Nunito Sans', sans-serif;
 }
 
 .saludo h4 {
-  color: #ffffff;
+  color: var(--blanco);
   font-weight: 700;
 }
 
 .saludo .rol {
   font-size: 0.9rem;
   font-weight: normal;
-  color: #e9f4d3;
+  color: var(--claro-suave);
 }
 
 .reloj {
-  color: #e9f4d3;
+  color: var(--claro-suave);
 }
 
 .tarjeta-kpi {
-  background-color: #f6fdf2;
-  border-left: 5px solid #e59500;
+  background-color: var(--claro-suave);
+  border-left: 5px solid var(--ambar-intenso);
   border-radius: 8px;
-  color: #4e6b2e;
+  color: var(--negro-profundo);
   transition: transform 0.2s ease;
 }
 
@@ -258,31 +371,32 @@ export default {
 
 .kpi-icon {
   font-size: 2.5rem;
-  color: #89a23c;
+  color: var(--ambar-intenso);
 }
 
 .tarjeta-tabla {
-  background-color: #8bb859;
-  color: white;
+  background-color: var(--ambar-intenso);
+  color: var(--blanco);
   border-radius: 10px;
 }
 
 .tarjeta-tabla .card-title i {
   font-size: 1.3rem;
-  color: white;
+  color: var(--blanco);
 }
 
 .tabla-scroll {
-  background-color: white;
+  background-color: var(--blanco);
   border-radius: 6px;
   padding: 0.5rem;
   overflow-x: auto;
-  color: #000;
+  color: var(--negro);
 }
 
+
 .btn-acceso-grande {
-  background-color: #e59500;
-  color: #2e4025;
+  background-color: var(--ambar-intenso);
+  color: var(--negro-profundo);
   border-radius: 16px;
   padding: 2rem 1rem;
   margin-bottom: 1rem;
@@ -296,7 +410,8 @@ export default {
 }
 
 .btn-acceso-grande:hover {
-  background-color: #92b349;
+  background-color: var(--claro-suave);
+  color: var(--negro-profundo);
   transform: scale(1.02);
 }
 
@@ -305,10 +420,10 @@ export default {
 }
 
 .grafica-blanca {
-  background: #fff;
+  background: var(--blanco);
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.07);
-  color: #4e6b2e;
+  color: var(--negro-profundo);
   min-height: 220px;
   display: flex;
   flex-direction: column;

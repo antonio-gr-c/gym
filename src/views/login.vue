@@ -67,7 +67,8 @@ const iniciarSesion = () => {
 }
 </script>
 
-<style scoped >
+<style scoped>
+@import '../assets/colors.css';
 .contenedor-login {
   display: flex;
   height: 100vh;
@@ -76,7 +77,7 @@ const iniciarSesion = () => {
 
 .lado-izquierdo {
   flex: 1;
-  background-color: #02040f;
+  background-color: var(--color-principal, #02040f);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,9 +132,9 @@ const iniciarSesion = () => {
 button {
   width: 100%;
   padding: 0.8rem;
-  background-color: #02040f;
+  background-color: var(--color-principal, #02040f);
   border: none;
-  color: white;
+  color: var(--color-texto-boton, #fff);
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
@@ -141,7 +142,7 @@ button {
 }
 
 button:hover {
-  background-color: #93b84f;
+  background-color: var(--color-acento, #93b84f);
 }
 
 @keyframes entrada {

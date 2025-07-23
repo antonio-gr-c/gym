@@ -1,0 +1,8 @@
+<template>
+  <div class="container mt-5">
+    <h2>Estás en Servicios</h2>
+  </div>
+</template>
+
+<script setup>
+</script>

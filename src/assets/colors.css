@@ -1,0 +1,14 @@
+:root {
+  /* Tonos principales de la nueva paleta */
+  --negro-profundo:   #02040f;  /* color principal */
+  --claro-suave:      #e5dada;  /* tono claro para fondos o elementos suaves */
+  --ambar-intenso:    #e59500;  /* acento fuerte / botones / énfasis */
+
+  /* Derivados para texto y fondos */
+  --texto:            var(--negro-profundo);
+  --fondo:            var(--claro-suave);
+
+  /* Complementarios */
+  --blanco:           #ffffff;
+  --negro:            #000000;
+}

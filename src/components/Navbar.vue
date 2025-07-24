@@ -1,38 +1,30 @@
 <template>
-  <nav class="navbar navbar-expand-lg fondo-navbar shadow-sm">
-    <div class="container-fluid">
-      <router-link to="/" class="navbar-brand d-flex align-items-center">
-        <img :src="logo" alt="Logo" class="logo-navbar-grande" />
+  <div class="sidebar">
+    <div class="logo-container">
+      <router-link to="/" class="logo-link">
+        <img :src="logo" alt="Logo" class="logo-sidebar" />
       </router-link>
-
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li v-for="item in menu" :key="item.nombre" class="nav-item">
-            <router-link :to="item.ruta" class="nav-link nav-animada">
-              <i class="material-icons me-1">{{ item.icono }}</i>{{ item.nombre }}
-            </router-link>
-          </li>
-        </ul>
-
-        <router-link to="/login" class="btn-login-icon ms-lg-3">
-          <i class="material-icons">login</i>
-        </router-link>
-      </div>
     </div>
-  </nav>
-</template>
 
+    <ul class="menu-list">
+      <li v-for="item in menu" :key="item.nombre" class="menu-item">
+        <router-link :to="item.ruta" class="menu-link" active-class="active-link">
+          <i class="material-icons me-2">{{ item.icono }}</i>
+          <span>{{ item.nombre }}</span>
+        </router-link>
+      </li>
+    </ul>
+
+    <div class="bottom-link">
+      <router-link to="/login" class="menu-link">
+        <i class="material-icons">logout</i>
+        
+      </router-link>
+    </div>
+  </div>
+</template>
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import logo from '../assets/images/logo.png'
 
 const menu = ref([
@@ -46,79 +38,70 @@ const menu = ref([
   { nombre: 'Servicios', ruta: '/servicios', icono: 'miscellaneous_services' },
   { nombre: 'Promociones', ruta: '/promociones', icono: 'local_offer' }
 ])
-
-onMounted(() => {
-  const navbar = document.querySelector('.fondo-navbar')
-  const handleScroll = () => {
-    if (window.scrollY > 10) navbar.classList.add('shrink')
-    else                    navbar.classList.remove('shrink')
-  }
-  window.addEventListener('scroll', handleScroll)
-  onUnmounted(() => window.removeEventListener('scroll', handleScroll))
-})
 </script>
-
 <style scoped>
 @import '../assets/colors.css';
-.fondo-navbar {
-  background-color: var(--color-principal, #02040f); /* NUEVO COLOR VERDE */
-  padding: 1.2rem 2rem;
-  position: sticky;
+
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #0f111a; /* Color de fondo oscuro */
+  color: #fff;
+  position: fixed;
   top: 0;
-  z-index: 1050;
-  transition: padding 0.25s, box-shadow 0.25s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.fondo-navbar.shrink {
-  padding: 0.5rem 1rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.13);
+.logo-container {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.logo-navbar-grande {
-  width: 70px;
-  height: 70px;
+.logo-sidebar {
+  width: 60px;
+  height: 60px;
   object-fit: contain;
-  transition: width 0.25s, height 0.25s;
-}
-.fondo-navbar.shrink .logo-navbar-grande {
-  width: 48px;
-  height: 48px;
 }
 
-.navbar-nav .nav-item {
-  margin-right: 1.5rem;
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
 }
 
+.menu-item {
+  margin-bottom: 1rem;
+}
 
-.nav-link {
-  color: var(--color-texto-navbar, #ffffff) !important;
+.menu-link {
+  display: flex;
+  align-items: center;
+  color: #bbb;
+  text-decoration: none;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
 }
 
-
-.nav-link.router-link-active,
-.nav-link:hover {
-  color: var(--color-acento, #333) !important;
+.menu-link:hover,
+.menu-link.active-link {
+  background-color: #1a1d2b;
+  color: #fff;
 }
 
-/* Botón de login solo ícono */
-.btn-login-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  color: var(--color-texto-navbar, #ffffff);
-  padding: 0.25rem;
-  font-size: 1.5rem;
-  transition: color 0.3s;
+.material-icons {
+  font-size: 20px;
 }
 
-.btn-login-icon:hover {
-  color: var(--color-acento, #333);
+.bottom-link {
+  padding-top: 2rem;
+  border-top: 1px solid #333;
 }
 </style>

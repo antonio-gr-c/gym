@@ -6,7 +6,7 @@
     <div class="encabezado-dashboard d-flex flex-wrap justify-content-between align-items-center p-3 mb-4">
       <div class="saludo">
         <h4 class="m-0">
-          Hola, Admin <span class="rol">(Administrador)</span>
+          Hola, Tadeo <span class="rol">(Administrador)</span>
         </h4>
       </div>
       <div class="reloj text-end">
@@ -47,28 +47,17 @@
     <div class="row mb-4 align-items-stretch">
       <div class="col-md-3 col-lg-2 mb-3" v-for="(kpi, index) in kpis" :key="index">
         <div class="card tarjeta-kpi h-100">
-          <div class="card-body d-flex align-items-center">
-            <i class="material-icons kpi-icon me-3">{{ kpi.icono }}</i>
-            <div>
-              <h5 class="card-title m-0">{{ kpi.valor }}</h5>
-              <p class="card-text small">{{ kpi.titulo }}</p>
-            </div>
+          <div class="card-body kpi-body">
+            <i class="material-icons kpi-icon">{{ kpi.icono }}</i>
+            <h5 class="kpi-valor">{{ kpi.valor }}</h5>
+            <p class="kpi-titulo">{{ kpi.titulo }}</p>
           </div>
         </div>
       </div>
     </div>
     <!-- Fin de tarjetas KPI -->
 
-    <!-- Accesos rápidos -->
-    <div class="row mb-4">
-      <div class="col-md-3 mb-3" v-for="(acceso, idx) in accesos" :key="idx">
-        <a :href="acceso.ruta" class="btn-acceso-grande d-flex flex-column align-items-center justify-content-center">
-          <i class="material-icons mb-2">{{ acceso.icono }}</i>
-          {{ acceso.label }}
-        </a>
-      </div>
-    </div>
-    <!-- Fin accesos rápidos -->
+   
 
     <!-- Tablas de contexto gym -->
     <div class="row">
@@ -398,21 +387,70 @@ export default {
   color: var(--claro-suave);
 }
 
+
 .tarjeta-kpi {
   background-color: var(--claro-suave);
   border-left: 5px solid var(--ambar-intenso);
   border-radius: 8px;
   color: var(--negro-profundo);
   transition: transform 0.2s ease;
+  min-width: 0;
 }
 
 .tarjeta-kpi:hover {
   transform: scale(1.02);
 }
 
+/* KPI pila: icono arriba, luego valor, luego texto */
+.kpi-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  text-align: center;
+  gap: 0.2rem;
+  height: 100%;
+}
 .kpi-icon {
   font-size: 2.5rem;
   color: var(--ambar-intenso);
+  margin-bottom: 0.2rem;
+}
+.kpi-valor {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  min-width: 0;
+  word-break: break-word;
+  text-align: center;
+}
+.kpi-titulo {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--negro-profundo);
+  word-break: break-word;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .kpi-body {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.3rem;
+  }
+  .kpi-icon {
+    margin-right: 0;
+    margin-bottom: 0.3rem;
+  }
+  .kpi-text {
+    width: 100%;
+    min-width: 0;
+  }
+  .tarjeta-kpi {
+    padding: 0.5rem 0.2rem;
+  }
 }
 
 .tarjeta-tabla {
